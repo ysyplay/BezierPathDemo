@@ -7,7 +7,8 @@
 //
 
 #import "TestVC1.h"
-
+#define WIDTH [[UIScreen mainScreen] bounds].size.width
+#define HEIGHT [[UIScreen mainScreen] bounds].size.height
 @interface TestVC1 ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong ) UITableView  *tableView;
 @property (nonatomic,copy   ) NSArray      *listArr;
