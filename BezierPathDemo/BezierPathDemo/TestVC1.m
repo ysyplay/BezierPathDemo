@@ -32,7 +32,8 @@
                  @{@"example7":@"圆弧"},
                  @{@"example8":@"扇形"},
                  @{@"example9":@"一阶曲线"},
-                 @{@"example10":@"二阶曲线"},];
+                 @{@"example10":@"二阶曲线"},
+                 @{@"example11":@"反向镂空"},];
     
     
     [self addShape];
@@ -162,7 +163,21 @@
     _shapeLayer.path = _path.CGPath;
 
 }
-
+//反向绘制
+- (void)example11{
+    UIBezierPath *bpath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, WIDTH, HEIGHT)];    //bezierPathByReversingPath表示反向绘制     （利用反向绘制掏出需要高亮的部分）
+    UIBezierPath *reversingPath = [[UIBezierPath bezierPathWithRoundedRect:CGRectMake(160, 100, 180, 100) cornerRadius:25] bezierPathByReversingPath];
+     [bpath appendPath: reversingPath];
+    //创建一个CAShapeLayer 图层，黑色半透明背景
+    CAShapeLayer  *shapeLayer = [CAShapeLayer layer];
+    shapeLayer.fillColor = [UIColor colorWithDisplayP3Red:0.1 green:0.1 blue:0.1 alpha:0.6].CGColor;
+    shapeLayer.path = bpath.CGPath;
+    
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT)];
+    bgView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:bgView];
+    [bgView.layer addSublayer:shapeLayer];
+}
 
 
 
